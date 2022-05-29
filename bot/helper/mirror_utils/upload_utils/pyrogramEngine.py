@@ -51,7 +51,6 @@ class TgUploader:
                 self.upload_file(up_path, file, dirpath)
                 if self.is_cancelled:
                     return
-                msgs_dict[file] = self.sent_msg.message_id
                 self.last_uploaded = 0
         LOGGER.info(f"Leech Done: {self.name}")
         self.__listener.onUploadComplete(self.name, None, msgs_dict, None, None)
@@ -79,7 +78,6 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_video(video=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
-                                                              parse_mode="html",
                                                               duration=duration,
                                                               width=480,
                                                               height=320,
@@ -98,7 +96,6 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
-                                                              parse_mode="html",
                                                               duration=duration,
                                                               performer=artist,
                                                               title=title,
@@ -109,7 +106,6 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
-                                                              parse_mode="html",
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
                 else:
@@ -123,7 +119,6 @@ class TgUploader:
                                                              quote=True,
                                                              thumb=thumb,
                                                              caption=cap_mono,
-                                                             parse_mode="html",
                                                              disable_notification=True,
                                                              progress=self.upload_progress)
                 if self.thumb is None and thumb is not None and os.path.lexists(thumb):
